@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
+
+:root {
+  --bg-color: #0d0f14;
+  --board-bg: #141824;
+  --text-color: #ffffff;
+  --ruby-color: #ff3366;
+  --ruby-dark: #b31439;
+  --ruby-glow: rgba(255, 51, 102, 0.7);
+  --pearl-color: #f0f4fa;
+  --pearl-dark: #a8b3c8;
+  --pearl-glow: rgba(240, 244, 250, 0.7);
+  --hex-bg: #1e2233;
+  --hex-border: rgba(255, 255, 255, 0.08);
+  --move-color: rgba(100, 255, 150, 0.6);
+  --jump-color: rgba(255, 200, 50, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  background-image: radial-gradient(circle at 50% 50%, #161a2b 0%, var(--bg-color) 100%);
+  color: var(--text-color);
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+}
+
+.main-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+}

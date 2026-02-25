@@ -1,0 +1,134 @@
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 4px;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #fff, #8a9bbd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    font-weight: 800;
+}
+
+.scoreboard {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.score-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(30, 34, 51, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--hex-border);
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.score-card.active {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.score-card.p1.active {
+    box-shadow: 0 0 20px var(--ruby-glow);
+}
+
+.score-card.p2.active {
+    box-shadow: 0 0 20px var(--pearl-glow);
+}
+
+.ruby-icon,
+.pearl-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.ruby-icon {
+    background: radial-gradient(circle at 30% 30%, #ff8a9f, var(--ruby-color));
+    box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.4), 0 0 10px var(--ruby-glow);
+}
+
+.pearl-icon {
+    background: radial-gradient(circle at 30% 30%, #ffffff, var(--pearl-color));
+    box-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.3), 0 0 10px var(--pearl-glow);
+}
+
+.game-over {
+    margin-top: 1rem;
+    background: rgba(20, 24, 36, 0.8);
+    backdrop-filter: blur(15px);
+    padding: 1.5rem 3rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.game-over h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+}
+
+.game-over p {
+    font-size: 1.25rem;
+    margin: 0 0 1.5rem 0;
+    opacity: 0.8;
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    color: white;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+}
+
+.reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 242, 254, 0.6);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

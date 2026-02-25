@@ -1,0 +1,175 @@
+.board-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.board-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* Centers the coordinates origin exactly in the middle of wrapper */
+}
+
+.hex-cell {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hex-cell:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    z-index: 2;
+}
+
+.hex-polygon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--hex-bg);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--hex-border);
+    /* clip-path doesn't render border well, but we can try */
+    transition: all 0.3s ease;
+}
+
+/* Fallback border simulation for clip-path */
+.hex-polygon::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    background-color: var(--board-bg);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    z-index: -1;
+}
+
+.hex-cell.selected .hex-polygon {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.hex-cell.valid-move .hex-polygon {
+    background-color: var(--move-color);
+    box-shadow: inset 0 0 15px rgba(100, 255, 150, 0.8);
+    animation: pulseMove 1.5s infinite;
+}
+
+.hex-cell.valid-jump .hex-polygon {
+    background-color: var(--jump-color);
+    box-shadow: inset 0 0 15px rgba(255, 200, 50, 0.8);
+    animation: pulseJump 1.5s infinite;
+}
+
+.hex-piece {
+    position: relative;
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    z-index: 5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: spawnPiece 0.3s ease-out;
+}
+
+.hex-piece.ruby {
+    background: radial-gradient(circle at 30% 30%, #ff8a9f, var(--ruby-color), var(--ruby-dark));
+    box-shadow: inset -3px -3px 8px rgba(0, 0, 0, 0.4), 0 0 15px var(--ruby-glow);
+}
+
+.hex-piece.pearl {
+    background: radial-gradient(circle at 30% 30%, #ffffff, var(--pearl-color), var(--pearl-dark));
+    box-shadow: inset -3px -3px 8px rgba(0, 0, 0, 0.3), 0 0 15px var(--pearl-glow);
+}
+
+.move-indicator,
+.jump-indicator {
+    position: absolute;
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    z-index: 4;
+    opacity: 0.8;
+}
+
+.move-indicator {
+    background-color: rgba(100, 255, 150, 1);
+    box-shadow: 0 0 10px rgba(100, 255, 150, 1);
+}
+
+.jump-indicator {
+    background-color: rgba(255, 200, 50, 1);
+    box-shadow: 0 0 10px rgba(255, 200, 50, 1);
+}
+
+@keyframes pulseMove {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.03);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+}
+
+@keyframes pulseJump {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.02);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+}
+
+@keyframes spawnPiece {
+    0% {
+        transform: scale(0);
+        filter: brightness(2);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+/* Enhancing the current player's pieces when selected */
+.hex-cell.selected .hex-piece {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    z-index: 10;
+}
