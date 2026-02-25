@@ -1,0 +1,208 @@
+.profile-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-card {
+    background: rgba(30, 34, 51, 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 3rem;
+    width: 100%;
+    color: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.6s ease-out;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+    border: 4px solid rgba(255, 255, 255, 0.2);
+}
+
+.view-username {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.username {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: #4facfe;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.icon-btn:hover {
+    transform: scale(1.1);
+}
+
+.edit-username {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.username-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    padding: 0.75rem 1rem;
+    font-size: 1.25rem;
+    outline: none;
+    font-family: inherit;
+    text-align: center;
+}
+
+.username-input:focus {
+    border-color: #4facfe;
+}
+
+.btn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    color: white;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn.small {
+    padding: 0.75rem 1.5rem;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 242, 254, 0.6);
+}
+
+.wallet-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value.win {
+    color: #00f2fe;
+}
+
+.stat-value.loss {
+    color: #ff3366;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.win-rate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: linear-gradient(90deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1));
+    border-radius: 12px;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.win-rate .value {
+    color: #4facfe;
+    font-size: 1.5rem;
+}
+
+.error-state {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.error-state p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

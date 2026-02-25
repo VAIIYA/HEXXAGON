@@ -2,16 +2,20 @@
 
 import React, { useState, useEffect } from 'react';
 import { Player, Hex, hexKey, keyToHex, generateBoard, getValidMoves, getNeighbors, INITIAL_BOARD_RADIUS } from '@/utils/hex';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { updateGameStats } from '@/utils/store';
 import HexagonBoard from './HexagonBoard';
 import './Game.css';
 
 export default function Game() {
+    const { publicKey } = useWallet();
     const [board, setBoard] = useState<Record<string, Player | 0>>({});
     const [currentPlayer, setCurrentPlayer] = useState<Player>(1);
     const [selectedHex, setSelectedHex] = useState<string | null>(null);
     const [validMoves, setValidMoves] = useState<{ moves: string[], jumps: string[] }>({ moves: [], jumps: [] });
     const [scores, setScores] = useState<{ p1: number, p2: number }>({ p1: 0, p2: 0 });
     const [gameOver, setGameOver] = useState<boolean>(false);
+    const [statsSaved, setStatsSaved] = useState<boolean>(false);
     const [winner, setWinner] = useState<Player | null>(null);
 
     useEffect(() => {
@@ -39,9 +43,19 @@ export default function Game() {
         setSelectedHex(null);
         setValidMoves({ moves: [], jumps: [] });
         setGameOver(false);
+        setStatsSaved(false);
         setWinner(null);
         updateScores(initialBoard, 1);
     };
+
+    useEffect(() => {
+        if (gameOver && !statsSaved && publicKey) {
+            const isWin = winner === 1;
+            const isTie = winner === null;
+            updateGameStats(publicKey.toBase58(), isWin, isTie);
+            setStatsSaved(true);
+        }
+    }, [gameOver, statsSaved, publicKey, winner]);
 
     const hasValidMoves = (currentBoard: Record<string, Player | 0>, player: Player) => {
         for (const [key, cell] of Object.entries(currentBoard)) {
